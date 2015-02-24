@@ -11,12 +11,20 @@ html(lang='en-US')
 
       .container
         h1 Chattz
+        form 
+          input(type="text", placeholder="name", id="chatName")
+          input(type="text", placeholder="sup?", id="chatText")
+          button(type="submit", id="chatBtn", class="btn btn-default") Start Chattin'
 
+        .chatArea
+          
       // build:js js/vendor.min.js
       // bower:js
       // endbower
       // endbuild
 
       // build:js js/main.min.js
+      script(src="../bower_components/jquery/dist/jquery.min.js")
+      script(src="../bower_components/firebase/firebase.js")
       script(src="/scripts/index.js")
       // endbuild
