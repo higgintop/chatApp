@@ -14,14 +14,29 @@ $('body').on('click', '#chatBtn', function(event) {
 
 
 	$('#chatText').val('');
-	location.reload(true);
+	//location.reload(true);
 
 });
 
-// testing
-fb.once('value', function (res){
-    var data = res.val();
-    Object.keys(data).forEach(function (uuid) {
-    	$('.chatArea').append('<p>'+ data[uuid].name + ': ' + data[uuid].message +'</p>');
-    });
-  })
+
+fb.on('child_added', function (res){
+  var data = res.val();
+  addChatMessage(data.name, data.message);
+  checkNumChats();
+})
+
+function addChatMessage(name, text) {
+  $('.chatArea').append('<p>'+ name + ': ' + text +'</p>');
+}
+
+function checkNumChats() {
+  var curLength = $('.chatArea').children().length;
+
+  console.log("current length", curLength);
+
+  if (curLength > 10){
+  	// remove 1st 10 from dom
+  	$('.chatArea p:lt(1)').remove();
+  }
+
+}
